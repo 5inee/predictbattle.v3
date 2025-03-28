@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 // تكوين CORS للسماح بالطلبات من الواجهة الأمامية
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://predictbattle-frontend.vercel.app'],
+  origin: ['http://localhost:3000', 'https://predict-battle.vercel.app', '*'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -50,6 +50,30 @@ app.get('/api/test', (req, res) => {
   });
 });
 
+// مسار اختبار قاعدة البيانات
+app.get('/api/db-status', (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  const states = {
+    0: 'غير متصل',
+    1: 'متصل',
+    2: 'جاري الاتصال',
+    3: 'قطع الاتصال'
+  };
+  
+  res.json({
+    server: 'يعمل',
+    database: {
+      state: dbState,
+      status: states[dbState] || 'غير معروف',
+      uri_defined: !!process.env.MONGODB_URI
+    },
+    environment: {
+      node_env: process.env.NODE_ENV,
+      port: process.env.PORT
+    }
+  });
+});
+
 // استيراد مسارات API
 const userRoutes = require('./server/routes/userRoutes');
 const sessionRoutes = require('./server/routes/sessionRoutes');
@@ -77,22 +101,25 @@ const server = app.listen(PORT, () => {
 });
 
 // دالة الاتصال بقاعدة البيانات
-// في دالة connectToDatabase في ملف server.js
 async function connectToDatabase() {
   try {
     console.log('جاري محاولة الاتصال بقاعدة البيانات...');
     
     if (!process.env.MONGODB_URI) {
       console.error('خطأ: متغير البيئة MONGODB_URI غير معرف!');
-      console.error('الرجاء التأكد من وجود متغير MONGODB_URI في إعدادات البيئة');
+      console.error('المتغيرات المتاحة:', Object.keys(process.env));
       return;
     }
     
-    console.log('عنوان الاتصال موجود، جاري محاولة الاتصال...');
+    console.log('عنوان الاتصال موجود، طوله:', process.env.MONGODB_URI.length);
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('تم الاتصال بقاعدة البيانات بنجاح!');
   } catch (error) {
     console.error('خطأ في الاتصال بقاعدة البيانات:', error);
+    console.error('سيستمر الخادم في العمل، لكن قد لا تعمل بعض الوظائف التي تتطلب قاعدة البيانات');
+    
+    // إعادة المحاولة بعد فترة
+    setTimeout(connectToDatabase, 5000);
   }
 }
 
