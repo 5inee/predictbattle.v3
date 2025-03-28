@@ -80,6 +80,12 @@ const server = app.listen(PORT, () => {
 async function connectToDatabase() {
   try {
     console.log('جاري محاولة الاتصال بقاعدة البيانات...');
+    
+    if (!process.env.MONGODB_URI) {
+      console.error('خطأ: متغير البيئة MONGODB_URI غير معرف. الرجاء تعيين عنوان اتصال قاعدة البيانات.');
+      return;
+    }
+    
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('تم الاتصال بقاعدة البيانات بنجاح!');
   } catch (error) {
