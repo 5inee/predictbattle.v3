@@ -77,23 +77,22 @@ const server = app.listen(PORT, () => {
 });
 
 // دالة الاتصال بقاعدة البيانات
+// في دالة connectToDatabase في ملف server.js
 async function connectToDatabase() {
   try {
     console.log('جاري محاولة الاتصال بقاعدة البيانات...');
     
     if (!process.env.MONGODB_URI) {
-      console.error('خطأ: متغير البيئة MONGODB_URI غير معرف. الرجاء تعيين عنوان اتصال قاعدة البيانات.');
+      console.error('خطأ: متغير البيئة MONGODB_URI غير معرف!');
+      console.error('الرجاء التأكد من وجود متغير MONGODB_URI في إعدادات البيئة');
       return;
     }
     
+    console.log('عنوان الاتصال موجود، جاري محاولة الاتصال...');
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('تم الاتصال بقاعدة البيانات بنجاح!');
   } catch (error) {
     console.error('خطأ في الاتصال بقاعدة البيانات:', error);
-    console.log('سيستمر الخادم في العمل، لكن قد لا تعمل بعض الوظائف التي تتطلب قاعدة البيانات');
-    
-    // إعادة المحاولة بعد فترة (اختياري)
-    setTimeout(connectToDatabase, 5000);
   }
 }
 
