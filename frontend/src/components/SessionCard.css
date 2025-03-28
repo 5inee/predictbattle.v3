@@ -1,0 +1,223 @@
+.session-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  padding: 0;
+  margin-bottom: 1.8rem;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(94, 96, 206, 0.15);
+  border-color: rgba(94, 96, 206, 0.1);
+}
+
+.session-header {
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.session-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--primary-gradient);
+}
+
+.session-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--dark-color);
+  margin: 0;
+  transition: color 0.3s;
+  padding-right: 0.8rem;
+  flex: 1;
+}
+
+.session-card:hover .session-title {
+  color: var(--primary-color);
+}
+
+.session-status-container {
+  margin-right: 1rem;
+}
+
+.session-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.session-status::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+.session-status.active {
+  background-color: rgba(33, 150, 243, 0.1);
+  color: #2196f3;
+}
+
+.session-status.active::before {
+  background-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.session-status.complete {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.session-status.complete::before {
+  background-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.session-details {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.session-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-right: 2rem;
+}
+
+.session-info:last-child {
+  margin-bottom: 0;
+}
+
+.session-info::before {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(94, 96, 206, 0.1);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+}
+
+.session-info.code::before {
+  content: '🔑';
+}
+
+.session-info.date::before {
+  content: '📅';
+}
+
+.session-info.participants::before {
+  content: '👥';
+}
+
+.info-label {
+  font-weight: 600;
+  color: #6c757d;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.session-code {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(94, 96, 206, 0.05);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.session-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  background-color: #f9f9fb;
+  border-top: 1px solid #f5f5f7;
+}
+
+.detail-btn {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.detail-btn::after {
+  content: '→';
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.session-card:hover .detail-btn::after {
+  transform: translateX(-5px);
+}
+
+.participants-count {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.participants-progress {
+  width: 150px;
+  height: 6px;
+  background-color: #f0f0f5;
+  border-radius: 10px;
+  margin: 0 0.5rem;
+  overflow: hidden;
+}
+
+.participants-progress-bar {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .session-header {
+    flex-direction: column;
+  }
+  
+  .session-status-container {
+    margin-right: 0;
+    margin-top: 0.8rem;
+    align-self: flex-start;
+  }
+  
+  .session-title {
+    margin-bottom: 0.5rem;
+  }
+}
