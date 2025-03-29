@@ -122,10 +122,11 @@ const SessionPage = () => {
   };
   
   // تنسيق التاريخ
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('ar-SA', options);
-  };
+// تنسيق التاريخ (بالميلادي)
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('ar', options);
+};
   
   if (loading) {
     return (

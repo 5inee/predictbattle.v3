@@ -8,17 +8,17 @@ const PredictionItem = ({ prediction, isCurrentUser }) => {
     return null;
   }
 
-  // تنسيق التاريخ والوقت
-  const formatDateTime = (dateString) => {
-    const options = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    };
-    return new Date(dateString).toLocaleDateString('ar-SA', options);
+// تنسيق التاريخ والوقت (بالميلادي)
+const formatDateTime = (dateString) => {
+  const options = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
   };
+  return new Date(dateString).toLocaleDateString('ar', options);
+};
 
   // توليد حرف أولي للمستخدم
   const getInitial = (username) => {
