@@ -9,8 +9,9 @@ const app = express();
 
 // Middleware
 // تكوين CORS للسماح بالطلبات من الواجهة الأمامية
+// تعديل تكوين CORS
 app.use(cors({
-  origin: '*',
+  origin: ['https://predictbattle-v3.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -39,10 +40,13 @@ app.get('/api/test', (req, res) => {
 // استيراد مسارات API
 const userRoutes = require('./server/routes/userRoutes');
 const sessionRoutes = require('./server/routes/sessionRoutes');
+const healthRoutes = require('./server/routes/healthRoutes');
 
 // استخدام المسارات
 app.use('/api/users', userRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/health', healthRoutes);
+
 
 // معالجة الأخطاء العامة
 app.use((err, req, res, next) => {
