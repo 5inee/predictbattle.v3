@@ -41,7 +41,7 @@ const CreateSessionPage = () => {
     
     // التحقق من إدخال العنوان
     if (!title.trim()) {
-      setErrorMessage('يرجى إدخال سؤال التحدي');
+      setErrorMessage('يرجى إدخال السؤال');
       return;
     }
     
@@ -92,14 +92,14 @@ const CreateSessionPage = () => {
         
         <form onSubmit={onSubmit}>
           <div className="form-section">
-            <h3 className="section-label">سؤال التحدي</h3>
+            <h3 className="section-label">سؤال الجلسة</h3>
             <textarea
               id="title"
               name="title"
               className="form-control"
               value={title}
               onChange={onChange}
-              placeholder="اكتب سؤال التحدي هنا..."
+              placeholder="اكتب سؤال الجلسة هنا..."
               rows={4}
             ></textarea>
           </div>
