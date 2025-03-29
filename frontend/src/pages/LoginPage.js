@@ -62,9 +62,9 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-image">
           <div className="auth-image-content">
-            <h2 className="auth-image-title">أهلا بعودتك!</h2>
+            <h2 className="auth-image-title">مرحبا بعودتك!</h2>
             <p className="auth-image-description">
-              قم بتسجيل الدخول واستمتع بتجربة فريدة مع منصة PredictBattle للتوقعات التفاعلية
+              سجل دخول بحسابك نفداش 
             </p>
           </div>
         </div>

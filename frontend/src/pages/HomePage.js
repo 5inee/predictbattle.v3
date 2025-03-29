@@ -19,14 +19,13 @@ const HomePage = () => {
       <section className="hero-section">
         <div className="welcome-card fade-in">
           <div className="welcome-header">
-            <h1 className="welcome-title">مرحبًا بك في PredictBattle</h1>
-            <p className="welcome-subtitle">منصة توقعات تفاعلية للمجموعات</p>
+            <h1 className="welcome-title">القرشينااات لو مقوووششش</h1>
+            <p className="welcome-subtitle">خش كضيف نفداك</p>
           </div>
           
           <div className="welcome-content">
             <p>
-              شارك مع أصدقائك وزملائك في تحديات تتنبأ فيها بالمستقبل في مختلف المجالات.
-              قم بإنشاء جلسات توقع، وادعو المشاركين، وقارن توقعاتكم في واجهة سهلة ومبهجة.
+              أي خطأ وارد، لذلك كن مدركًا أن.. يرجال فاضي تقرا؟ خش كضيف اخلص
             </p>
           </div>
           

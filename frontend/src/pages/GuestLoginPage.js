@@ -58,7 +58,7 @@ const GuestLoginPage = () => {
           <div className="auth-image-content">
             <h2 className="auth-image-title">دخول سريع</h2>
             <p className="auth-image-description">
-              ادخل كضيف واختبر المنصة بسرعة دون الحاجة لإنشاء حساب كامل
+              ادخل كضيف دون الحاجة لإنشاء حساب كامل
             </p>
           </div>
         </div>

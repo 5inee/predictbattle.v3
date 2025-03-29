@@ -77,7 +77,7 @@ const RegisterPage = () => {
           <div className="auth-image-content">
             <h2 className="auth-image-title">انضم إلينا اليوم!</h2>
             <p className="auth-image-description">
-              أنشئ حسابك وابدأ رحلة التوقعات والتحديات مع أصدقائك وزملائك
+              انشئ حسابك وكن جزءًا من هذا الحصن العظيم، واعظماهاهاههاهههه
             </p>
           </div>
         </div>
