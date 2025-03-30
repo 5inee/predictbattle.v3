@@ -162,11 +162,11 @@
   display: flex;
   align-items: center;
   position: relative;
+  padding-right: 2rem;
 }
 
 .session-status-container::before {
   content: '🔔';
-  position: absolute;
   right: 0;
   font-size: 1.2rem;
   color: var(--primary-color);
