@@ -121,7 +121,7 @@ const GuestLoginPage = () => {
                   />
                 </div>
                 <small className="form-text text-warning">
-                  <strong>تنبيه:</strong>الأسماء التالية محظورة: القذافي، صدام، الحجاج، كريستيانو</small>
+                  <strong>أسماء محظورة: </strong>القذافي، صدام، الحجاج، كريستيانو</small>
               </div>
               
               <button 
