@@ -277,14 +277,6 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.slide-in {
-  animation: slideIn 0.5s ease forwards;
-}
-
 /* قسم الدعوة للعمل */
 .cta-section {
   padding: 5rem 1.5rem;
