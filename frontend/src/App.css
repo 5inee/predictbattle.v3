@@ -531,6 +531,23 @@ textarea.form-control::placeholder {
 .fade-in {
 }
 
+.form-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-top: 0.7rem;
+  display: block;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+  font-size: 0.85rem;
+  background-color: rgba(255, 193, 7, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  border-right: 3px solid #ffc107;
+}
+
 /* للشاشات الصغيرة */
 @media (max-width: 768px) {
   .main-content {

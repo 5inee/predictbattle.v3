@@ -3,6 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import './AuthPages.css';
 
+// قائمة الأسماء المحظورة ومشتقاتها
+const BANNED_NAMES = [
+  // معمر القذافي ومشتقاته
+  'القذافي', 'معمر القذافي', 'معمر', 'أبو منيار', 'ابن القذافي', 'عائلة القذافي', 'جماهيرية', 'الثورة الخضراء', 'الكتاب الأخضر', 
+
+  // صدام حسين ومشتقاته
+  'صدام', 'صدام حسين', 'ابن صدام', 'حزب البعث', 'البعثي', 'عائلة صدام', 'الرئيس صدام', 'القائد الضرورة', 'المهيب الركن', 'العوجة', 
+
+  // الحجاج بن يوسف ومشتقاته
+  'الحجاج', 'الحجاج بن يوسف', 'الحجاج الثقفي', 'ابن يوسف', 'والي العراق', 'سفاح العراق', 'الحاكم الدموي', 'طاغية العراق', 
+
+  // كريستيانو رونالدو ومشتقاته
+  'كريستيانو', 'رونالدو', 'كريستيانو رونالدو', 'CR7', 'الدون', 'صاروخ ماديرا', 'CR', 'كريس', 'الأسطورة كريستيانو', 'CRISTIANO', 
+
+  // إضافة بعض الاختصارات المحتملة لمنع التلاعب
+  'قذافي', 'معمّر', 'Saddam', 'Hussein', 'Al-Qaddafi', 'Cristiano Ronaldo', 'Don Ronaldo', 'Al-Hajjaj', 'Hajajj'
+];
+
+
 const GuestLoginPage = () => {
   const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -30,12 +49,29 @@ const GuestLoginPage = () => {
     setErrorMessage('');
   };
   
+  // التحقق من اسم المستخدم إذا كان محظوراً
+  const isNameBanned = (name) => {
+    // تحويل الاسم إلى حروف صغيرة وإزالة الفراغات للمقارنة
+    const normalizedName = name.trim().toLowerCase();
+    
+    return BANNED_NAMES.some(bannedName => 
+      normalizedName.includes(bannedName.toLowerCase()) || 
+      bannedName.toLowerCase().includes(normalizedName)
+    );
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     
     // التحقق من إدخال اسم المستخدم
     if (!username) {
       setErrorMessage('يرجى إدخال اسم المستخدم');
+      return;
+    }
+    
+    // التحقق من أن الاسم غير محظور
+    if (isNameBanned(username)) {
+      setErrorMessage('تستهبل انت؟');
       return;
     }
     
@@ -84,6 +120,8 @@ const GuestLoginPage = () => {
                     placeholder="أدخل اسمك"
                   />
                 </div>
+                <small className="form-text text-warning">
+                  <strong>تنبيه:</strong>الأسماء التالية محظورة: القذافي، صدام، الحجاج، كريستيانو</small>
               </div>
               
               <button 
