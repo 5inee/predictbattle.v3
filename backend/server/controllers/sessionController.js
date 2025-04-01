@@ -139,10 +139,8 @@ exports.submitPrediction = async (req, res) => {
       text
     });
 
-    // التحقق مما إذا كان جميع المشاركين قد قدموا توقعاتهم
-    if (session.predictions.length === session.participants.length) {
-      session.isComplete = true;
-    }
+    // تحديث حالة الاكتمال بناءً على عدد التوقعات والمشاركين
+    session.isComplete = session.predictions.length === session.participants.length;
 
     await session.save();
 

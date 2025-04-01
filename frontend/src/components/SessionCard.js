@@ -16,13 +16,22 @@ const SessionCard = ({ session }) => {
     return (participantsCount / maxPlayers) * 100;
   };
 
+  // حساب حالة الجلسة بناءً على عدد التوقعات والمشاركين
+  const isSessionComplete = () => {
+    // إذا كانت التوقعات غير معرفة، قم بالمقارنة على افتراض أنها فارغة
+    const predictionsLength = session.predictions?.length || 0;
+    const participantsLength = session.participants?.length || 0;
+    
+    return predictionsLength === participantsLength && participantsLength > 0;
+  };
+
   return (
     <div className="session-card">
       <div className="session-header">
         <h3 className="session-title">{session.title}</h3>
         <div className="session-status-container">
-          <span className={`session-status ${session.isComplete ? 'complete' : 'active'}`}>
-            {session.isComplete ? 'مكتملة' : 'نشطة'}
+          <span className={`session-status ${isSessionComplete() ? 'complete' : 'active'}`}>
+            {isSessionComplete() ? 'مكتملة' : 'نشطة'}
           </span>
         </div>
       </div>

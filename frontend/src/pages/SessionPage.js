@@ -211,10 +211,10 @@ const SessionPage = () => {
             <span>{session.participants.length}/{session.maxPlayers}</span>
           </div>
           
-          <div className="session-status-container">
+          <div className="session-info session-status-container">
             <span className="meta-label">الحالة:</span>
-            <span className={`session-status ${session.isComplete ? 'complete' : 'active'}`}>
-              {session.isComplete ? 'مكتملة' : 'نشطة'}
+            <span className={`session-status ${session.participants.length === session.predictions.length ? 'complete' : 'active'}`}>
+              {session.participants.length === session.predictions.length ? 'مكتملة' : 'نشطة'}
             </span>
           </div>
         </div>
