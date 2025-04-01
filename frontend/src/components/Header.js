@@ -32,11 +32,41 @@ const Header = () => {
           </Link>
         </div>
         
-        <div className="mobile-menu" onClick={toggleMobileMenu}>
+        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
           {showMobileMenu ? '✕' : '☰'}
-        </div>
+        </button>
         
-        <nav className={`nav ${showMobileMenu ? 'show' : ''}`}>
+        {/* Desktop Navigation */}
+        <nav className="nav-desktop">
+          {user ? (
+            <>
+              <span className="username">{user.username}</span>
+              <Link to="/dashboard" className="nav-link">
+                لوحة التحكم
+              </Link>
+              <button onClick={handleLogout} className="btn btn-text">
+                تسجيل الخروج
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">
+                تسجيل الدخول
+              </Link>
+              <Link to="/register" className="nav-link">
+                إنشاء حساب
+              </Link>
+              <Link to="/guest" className="nav-link">
+                دخول كضيف
+              </Link>
+            </>
+          )}
+        </nav>
+        
+        {/* Mobile Navigation */}
+        <div className={`overlay ${showMobileMenu ? 'open' : ''}`} onClick={closeMobileMenu}></div>
+        <nav className={`nav-mobile ${showMobileMenu ? 'open' : ''}`}>
+          <button className="mobile-menu-close" onClick={closeMobileMenu}>✕</button>
           {user ? (
             <>
               <span className="username">{user.username}</span>

@@ -201,9 +201,6 @@ const DashboardPage = () => {
         )}
       </div>
       
-      <Link to="/create-session" className="floating-btn" title="إنشاء جلسة جديدة">
-        +
-      </Link>
     </div>
   );
 };

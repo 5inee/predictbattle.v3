@@ -129,6 +129,7 @@
   font-weight: 700;
   position: relative;
   display: inline-block;
+  padding-right: 0; /* إزالة التباعد من اليمين */
 }
 
 .section-title::after {

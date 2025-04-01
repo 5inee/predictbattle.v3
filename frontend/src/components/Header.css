@@ -17,6 +17,21 @@
   padding: 0 1.5rem;
 }
 
+/* إضافة هذه الأنماط إلى نهاية ملف Header.css */
+
+/* تعديل تنسيق اسم المستخدم في الهيدر */
+.header .username {
+  display: inline-block;
+  margin-left: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background-color: rgba(105, 48, 195, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  max-width: max-content;
+}
+
 .logo a {
   display: flex;
   align-items: center;
@@ -71,7 +86,7 @@
   transform-origin: left;
 }
 
-.nav {
+.nav-desktop {
   display: flex;
   align-items: center;
 }
@@ -126,6 +141,56 @@
   font-size: 1.5rem;
   color: var(--primary-color);
   cursor: pointer;
+  padding: 0.5rem;
+}
+
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 2000;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-mobile.open {
+  right: 0;
+}
+
+.nav-mobile .nav-link {
+  margin: 1rem 0;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1500;
+  display: none;
+}
+
+.overlay.open {
+  display: block;
 }
 
 /* للشاشات المتوسطة والصغيرة */
@@ -135,55 +200,6 @@
   }
   
   .mobile-menu-toggle {
-    display: block;
-  }
-  
-  .nav-mobile {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 280px;
-    height: 100vh;
-    background-color: white;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease;
-    z-index: 2000;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .nav-mobile.open {
-    right: 0;
-  }
-  
-  .nav-mobile .nav-link {
-    margin: 1rem 0;
-  }
-  
-  .mobile-menu-close {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1500;
-    display: none;
-  }
-  
-  .overlay.open {
     display: block;
   }
 }

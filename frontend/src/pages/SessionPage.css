@@ -232,7 +232,7 @@
   background: var(--primary-gradient);
 }
 
-.section-title {
+.session-page .section-title {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
@@ -240,10 +240,10 @@
   color: var(--dark-color);
   font-weight: 700;
   position: relative;
-  padding-right: 2.5rem;
+  padding-right: 2.5rem; /* إعادة التباعد الأصلي للأيقونة */
 }
 
-.section-title::before {
+.session-page .section-title::before {
   position: absolute;
   right: 0;
   top: 50%;
@@ -259,11 +259,11 @@
   color: var(--primary-color);
 }
 
-.section-title.prediction::before {
+.session-page .section-title.prediction::before {
   content: '✏️';
 }
 
-.section-title.predictions::before {
+.session-page .section-title.predictions::before {
   content: '📋';
 }
 

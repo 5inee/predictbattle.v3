@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import './SessionCard.css';
 
 const SessionCard = ({ session }) => {
-  // تنسيق التاريخ
-// تنسيق التاريخ (بالميلادي)
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('ar', options);
-};
+  // تنسيق التاريخ (بالميلادي)
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ar', options);
+  };
 
   // حساب نسبة المشاركين إلى الحد الأقصى
   const calculateProgressPercentage = () => {

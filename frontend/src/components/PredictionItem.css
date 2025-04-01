@@ -88,13 +88,18 @@
   flex-direction: column;
 }
 
-.username {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--dark-color);
+/* تغيير من div.username إلى div.username-container */
+.username-container {
   display: flex;
   align-items: center;
   margin-bottom: 0.2rem;
+}
+
+/* إضافة تنسيق لنص اسم المستخدم */
+.username-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--dark-color);
 }
 
 .user-badge {
