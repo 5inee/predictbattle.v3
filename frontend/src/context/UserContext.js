@@ -19,22 +19,26 @@ export const UserProvider = ({ children }) => {
       if (token) {
         try {
           // تكوين الهيدر
-          const config = {
+          const headers = {
             headers: {
               Authorization: `Bearer ${token}`
             }
           };
           
           // جلب بيانات المستخدم
-          const { data } = await axios.get(`${config.API_URL}/users/profile`, config);
+          const { data } = await axios.get(`${config.API_URL}/users/profile`, headers);
           
+          // حفظ بيانات المستخدم بما في ذلك التوكن
           setUser({
             ...data,
             token
           });
+          
+          console.log('تم تحميل بيانات المستخدم بنجاح', data);
         } catch (error) {
-          localStorage.removeItem('userToken');
           console.error('فشل في تحميل المستخدم:', error);
+          // فقط في حالة الخطأ نزيل التوكن
+          localStorage.removeItem('userToken');
         }
       }
       

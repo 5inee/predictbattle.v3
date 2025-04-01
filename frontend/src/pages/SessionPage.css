@@ -424,3 +424,37 @@
     font-size: 1.2rem;
   }
 }
+
+/* أضف هذه الأنماط إلى ملف SessionPage.css */
+
+.refresh-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: rgba(105, 48, 195, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn::before {
+  content: '🔄';
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.refresh-btn:hover {
+  background-color: rgba(105, 48, 195, 0.1);
+}
+
+.refresh-btn:hover::before {
+  transform: rotate(90deg);
+}

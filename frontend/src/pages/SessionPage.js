@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import PredictionItem from '../components/PredictionItem';
@@ -16,11 +16,28 @@ const SessionPage = () => {
   const [copied, setCopied] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   
+  // إضافة مرجع للحفاظ على تتبع حالة تحميل البيانات
+  const dataLoaded = useRef(false);
+  
   const { id } = useParams();
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  
+  // إعادة التوجيه إذا لم يكن المستخدم مسجل الدخول
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login');
+    }
+  }, [user, loading, navigate]);
   
   // جلب بيانات الجلسة مع استخدام useCallback
   const fetchSession = useCallback(async () => {
+    // إذا لم يكن لدينا توكن مستخدم صالح، نعود
+    if (!user || !user.token) {
+      console.log('لا يوجد توكن مستخدم، لا يمكن جلب بيانات الجلسة');
+      return;
+    }
+    
     try {
       setLoading(true);
       
@@ -31,26 +48,41 @@ const SessionPage = () => {
         }
       };
       
+      console.log('جاري جلب بيانات الجلسة...');
+      
       // جلب البيانات
       const { data } = await axios.get(`${config.API_URL}/sessions/${id}`, headers);
       
+      console.log('تم جلب بيانات الجلسة بنجاح', data);
+      
       setSession(data.session);
-      setLoading(false);
+      dataLoaded.current = true;
     } catch (error) {
-      console.error('خطأ في جلب بيانات الجلسة:', error);
+      console.error('خطأ في جلب بيانات الجلسة:', error.response || error);
       setErrorMessage('حدث خطأ أثناء جلب بيانات الجلسة');
+    } finally {
       setLoading(false);
     }
-  }, [id, user.token]);
+  }, [id, user]);
   
   // تحميل البيانات عند تحميل الصفحة أو تغيير مفتاح التحديث
   useEffect(() => {
-    fetchSession();
-  }, [fetchSession, refreshKey]);
+    // فقط إذا كان المستخدم مسجل الدخول وتوكن المستخدم متاح
+    if (user && user.token && !dataLoaded.current) {
+      fetchSession();
+    }
+  }, [fetchSession, user, refreshKey]);
+  
+  // إعادة محاولة جلب البيانات عند تغيير المستخدم
+  useEffect(() => {
+    if (user && user.token) {
+      fetchSession();
+    }
+  }, [user, fetchSession]);
   
   // التحقق من أن المستخدم قدم توقعًا بالفعل
   const hasSubmittedPrediction = () => {
-    if (!session || !session.predictions) return false;
+    if (!session || !session.predictions || !user) return false;
     
     const hasSubmitted = session.predictions.some(
       prediction => prediction.user._id === user._id
@@ -105,30 +137,27 @@ const SessionPage = () => {
       setSession(data.session);
       setSuccessMessage('تم إرسال توقعك بنجاح');
       setPrediction('');
-      setSubmitting(false);
       
-      // تحديث مفتاح التحديث لإجبار الصفحة على إعادة التحميل
-      setRefreshKey(oldKey => oldKey + 1);
-      
-      // إعادة جلب بيانات الجلسة للتأكد من استلام أحدث البيانات
+      // إعادة جلب بيانات الجلسة بعد تقديم التوقع
       setTimeout(() => {
         fetchSession();
       }, 500);
     } catch (error) {
       console.error('خطأ في إرسال التوقع:', error);
       setErrorMessage(error.response?.data?.message || 'حدث خطأ أثناء إرسال التوقع');
+    } finally {
       setSubmitting(false);
     }
   };
   
-  // تنسيق التاريخ
-// تنسيق التاريخ (بالميلادي)
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('ar', options);
-};
+  // تنسيق التاريخ (بالميلادي)
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ar', options);
+  };
   
-  if (loading) {
+  // إظهار شاشة التحميل
+  if (loading && !session) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
@@ -137,12 +166,13 @@ const formatDate = (dateString) => {
     );
   }
   
-  if (!session) {
+  // في حالة عدم وجود جلسة ولكن انتهى التحميل، إظهار رسالة خطأ
+  if (!loading && !session) {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
         <h2>خطأ في تحميل الجلسة</h2>
-        <p>{errorMessage}</p>
+        <p>{errorMessage || 'لا يمكن الوصول إلى بيانات الجلسة. يرجى التحقق من الرابط والمحاولة مرة أخرى.'}</p>
         <Link to="/dashboard" className="btn btn-primary">
           العودة إلى لوحة التحكم
         </Link>
@@ -191,6 +221,19 @@ const formatDate = (dateString) => {
       </div>
       
       <div className="session-content">
+        {/* زر تحديث بيانات الجلسة */}
+        <div className="refresh-container">
+          <button 
+            className="btn btn-text refresh-btn"
+            onClick={() => {
+              dataLoaded.current = false;
+              fetchSession();
+            }}
+          >
+            تحديث البيانات
+          </button>
+        </div>
+      
         {/* عرض نموذج التوقع إذا لم يكن المستخدم قد قدم توقعًا بعد */}
         {!userHasPredicted && (
           <div className="prediction-form-container">
