@@ -293,7 +293,6 @@
 
 .join-btn::before {
   content: '▶';
-  margin-left: 0.5rem;
   font-size: 0.9rem;
 }
 
@@ -308,7 +307,6 @@
 
 .create-btn::before {
   content: '▶';
-  margin-left: 0.5rem;
   font-size: 0.9rem;
 }
 
