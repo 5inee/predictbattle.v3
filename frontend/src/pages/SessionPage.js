@@ -34,7 +34,7 @@ const SessionPage = () => {
   const fetchSession = useCallback(async () => {
     // إذا لم يكن لدينا توكن مستخدم صالح، نعود
     if (!user || !user.token) {
-      console.log('لا يوجد توكن مستخدم، لا يمكن جلب بيانات الجلسة');
+      console.log('لا يوجد توكن لليوزر لا يمكن جلب بيانات القيم');
       return;
     }
     
@@ -48,18 +48,18 @@ const SessionPage = () => {
         }
       };
       
-      console.log('جاري جلب بيانات الجلسة...');
+      console.log('جاري جلب بيانات القيم...');
       
       // جلب البيانات
       const { data } = await axios.get(`${config.API_URL}/sessions/${id}`, headers);
       
-      console.log('تم جلب بيانات الجلسة بنجاح', data);
+      console.log('تم جلب بيانات القيم بنجاح', data);
       
       setSession(data.session);
       dataLoaded.current = true;
     } catch (error) {
-      console.error('خطأ في جلب بيانات الجلسة:', error.response || error);
-      setErrorMessage('حدث خطأ أثناء جلب بيانات الجلسة');
+      console.error('خطأ في جلب بيانات القيم:', error.response || error);
+      setErrorMessage('حدث خطأ أثناء جلب بيانات القيم');
     } finally {
       setLoading(false);
     }
@@ -111,7 +111,7 @@ const SessionPage = () => {
     
     // التحقق من إدخال التوقع
     if (!prediction.trim()) {
-      setErrorMessage('يرجى إدخال توقعك');
+      setErrorMessage('لازم تكتب توقعك');
       return;
     }
     
@@ -135,7 +135,7 @@ const SessionPage = () => {
       
       // تحديث الجلسة المحلية
       setSession(data.session);
-      setSuccessMessage('تم إرسال توقعك بنجاح');
+      setSuccessMessage('انرسل توقعك بنجاح');
       setPrediction('');
       
       // إعادة جلب بيانات الجلسة بعد تقديم التوقع
@@ -161,7 +161,7 @@ const SessionPage = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="loading-text">جارِ تحميل بيانات الجلسة...</p>
+        <p className="loading-text">جارِ تحميل بيانات القيم...</p>
       </div>
     );
   }
@@ -171,10 +171,10 @@ const SessionPage = () => {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
-        <h2>خطأ في تحميل الجلسة</h2>
-        <p>{errorMessage || 'لا يمكن الوصول إلى بيانات الجلسة. يرجى التحقق من الرابط والمحاولة مرة أخرى.'}</p>
+        <h2>خطأ في تحميل القيم</h2>
+        <p>{errorMessage || 'ما قدرت توصل للقيم. يليت لو تحقق من الرابط وتحاول مرة ثانية.'}</p>
         <Link to="/dashboard" className="btn btn-primary">
-          العودة إلى لوحة التحكم
+          ارجع للداشبورد
         </Link>
       </div>
     );
@@ -190,7 +190,7 @@ const SessionPage = () => {
         
         <div className="session-meta">
           <div className="session-code-container">
-            <span className="meta-label">كود الجلسة:</span>
+            <span className="meta-label">كود القيم:</span>
             <span className="session-code">{session.code}</span>
             <button 
               className="copy-btn" 
@@ -207,7 +207,7 @@ const SessionPage = () => {
           </div>
           
           <div className="session-info participants">
-            <span className="meta-label">المشاركون:</span>
+            <span className="meta-label">المشاركين:</span>
             <span>{session.participants.length}/{session.maxPlayers}</span>
           </div>
           
@@ -230,7 +230,7 @@ const SessionPage = () => {
               fetchSession();
             }}
           >
-            تحديث البيانات
+            تحديث القائمة
           </button>
         </div>
       
@@ -263,13 +263,13 @@ const SessionPage = () => {
                 className="btn btn-primary submit-prediction-btn"
                 disabled={submitting}
               >
-                {submitting ? 'جارِ الإرسال...' : 'إرسال التوقع'}
+                {submitting ? 'جارِ الإرسال...' : 'ارسل توقعك'}
               </button>
             </form>
             
             {/* رسالة إخبارية للمستخدم بضرورة إرسال التوقع أولاً */}
             <div className="alert-info mt-4">
-              لازم ترسل قبل عشان تقدر تشوف توقعات المشاركين الثانين
+              لازم ترسل قبل عشان تقدر تشوف توقعات المشاركين الباقين
             </div>
           </div>
         )}
@@ -287,7 +287,7 @@ const SessionPage = () => {
             {session.predictions.length === 0 ? (
               <div className="empty-predictions">
                 <div className="empty-predictions-icon">📝</div>
-                <p>لا توجد توقعات حتى الآن.</p>
+                <p>ما فيه توقعات للحين</p>
               </div>
             ) : (
               <div className="predictions-list">
@@ -306,14 +306,14 @@ const SessionPage = () => {
         {/* إظهار رسالة للمستخدم عند إرسال التوقع في حالة عدم وجود توقعات أخرى */}
         {userHasPredicted && session.predictions.length <= 1 && (
           <div className="alert-info mt-4">
-            توقعات المشاركين الثانين بتظهر هنا بمجرد إرسالها
+            أنت أول واحد ارسل، توقعات الباقين بتطلع هنا لما يرسلون
           </div>
         )}
       </div>
       
       <div className="session-footer">
         <Link to="/dashboard" className="btn btn-secondary back-to-dashboard">
-          العودة إلى لوحة التحكم
+          ارجع للداشبورد
         </Link>
       </div>
     </div>

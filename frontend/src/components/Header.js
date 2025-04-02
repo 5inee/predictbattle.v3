@@ -27,8 +27,8 @@ const Header = () => {
       <div className="header-container">
         <div className="logo">
           <Link to="/" onClick={closeMobileMenu}>
-            <span className="logo-icon">⚡</span>
-            <span className="logo-text">PredictBattle</span>
+            {/* <span className="logo-icon">⚡</span> */}
+            {/* <span className="logo-text">PredictBattle</span> */}
           </Link>
         </div>
         
@@ -42,7 +42,7 @@ const Header = () => {
             <>
               <span className="username">{user.username}</span>
               <Link to="/dashboard" className="nav-link">
-                لوحة التحكم
+                الداشبورد
               </Link>
               <button onClick={handleLogout} className="btn btn-text">
                 تسجيل الخروج
@@ -57,7 +57,7 @@ const Header = () => {
                 إنشاء حساب
               </Link>
               <Link to="/guest" className="nav-link">
-                دخول كضيف
+                دخول كجيست
               </Link>
             </>
           )}
@@ -71,7 +71,7 @@ const Header = () => {
             <>
               <span className="username">{user.username}</span>
               <Link to="/dashboard" className="nav-link" onClick={closeMobileMenu}>
-                لوحة التحكم
+                الداشبورد
               </Link>
               <button onClick={handleLogout} className="btn btn-text">
                 تسجيل الخروج
@@ -86,7 +86,7 @@ const Header = () => {
                 إنشاء حساب
               </Link>
               <Link to="/guest" className="nav-link" onClick={closeMobileMenu}>
-                دخول كضيف
+                دخول كجيست
               </Link>
             </>
           )}

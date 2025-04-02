@@ -92,16 +92,16 @@ const GuestLoginPage = () => {
       <div className="auth-container">
         <div className="auth-image">
           <div className="auth-image-content">
-            <h2 className="auth-image-title">دخول سريع</h2>
+            <h2 className="auth-image-title">ادخل بسرعة</h2>
             <p className="auth-image-description">
-              ادخل كضيف دون الحاجة لإنشاء حساب كامل
+              ادخل كجيست بدون ما تسوي حساب كامل
             </p>
           </div>
         </div>
         
         <div className="auth-form">
           <div className="auth-card">
-            <h2 className="auth-title">الدخول كضيف</h2>
+            <h2 className="auth-title">الدخول كجيست</h2>
             
             {errorMessage && (
               <div className="alert alert-error">{errorMessage}</div>
@@ -109,7 +109,7 @@ const GuestLoginPage = () => {
             
             <form onSubmit={onSubmit}>
               <div className="input-group">
-                <label className="input-label" htmlFor="username">اسم المستخدم</label>
+                <label className="input-label" htmlFor="username">اليوزر (عادي تحط مسافة)</label>
                 <div className="input-wrapper">
                   <input
                     type="text"
@@ -117,7 +117,7 @@ const GuestLoginPage = () => {
                     className="form-control"
                     value={username}
                     onChange={onChange}
-                    placeholder="أدخل اسمك"
+                    placeholder="اكتب يوزرك"
                   />
                 </div>
                 <small className="form-text text-warning">
@@ -129,7 +129,7 @@ const GuestLoginPage = () => {
                 className="btn btn-primary btn-block auth-btn"
                 disabled={isLoading}
               >
-                {isLoading ? 'جارِ الدخول...' : 'الدخول كضيف'}
+                {isLoading ? 'جارِ الدخول...' : 'الدخول كجيست'}
               </button>
             </form>
             

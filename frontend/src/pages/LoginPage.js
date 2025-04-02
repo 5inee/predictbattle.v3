@@ -40,7 +40,7 @@ const LoginPage = () => {
     
     // التحقق من إدخال جميع البيانات
     if (!username || !password) {
-      setErrorMessage('يرجى إدخال اسم المستخدم وكلمة المرور');
+      setErrorMessage('لازم تكتب اليوزر والباسوورد');
       return;
     }
     
@@ -79,7 +79,7 @@ const LoginPage = () => {
             
             <form onSubmit={onSubmit}>
               <div className="input-group">
-                <label className="input-label" htmlFor="username">اسم المستخدم</label>
+                <label className="input-label" htmlFor="username">اليوزر</label>
                 <div className="input-wrapper">
                   <input
                     type="text"
@@ -88,13 +88,13 @@ const LoginPage = () => {
                     className="form-control"
                     value={username}
                     onChange={onChange}
-                    placeholder="أدخل اسم المستخدم"
+                    placeholder="اكتب يوزرك"
                   />
                 </div>
               </div>
               
               <div className="input-group">
-                <label className="input-label" htmlFor="password">كلمة المرور</label>
+                <label className="input-label" htmlFor="password">الباسوورد</label>
                 <div className="input-wrapper">
                   <input
                     type="password"
@@ -103,7 +103,7 @@ const LoginPage = () => {
                     className="form-control"
                     value={password}
                     onChange={onChange}
-                    placeholder="أدخل كلمة المرور"
+                    placeholder="اكتب الباسوورد"
                   />
                 </div>
               </div>
@@ -119,19 +119,20 @@ const LoginPage = () => {
             
             <div className="auth-links">
               <p>
-                ليس لديك حساب؟{' '}
+                ما عندك حساب؟{' '}
                 <Link to="/register" className="auth-link">
                   إنشاء حساب جديد
                 </Link>
               </p>
               <p>
-                <Link to="/" className="auth-link">
-                  العودة للصفحة الرئيسية
+                ما تبي تسوي حساب؟ {' '}
+                <Link to="/guest" className="auth-link">
+                  الدخول كجيست
                 </Link>
               </p>
               <p>
-                <Link to="/guest" className="auth-link">
-                  الدخول كضيف
+                <Link to="/" className="auth-link">
+                  العودة للصفحة الرئيسية
                 </Link>
               </p>
             </div>

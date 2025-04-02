@@ -41,13 +41,13 @@ const CreateSessionPage = () => {
     
     // التحقق من إدخال العنوان
     if (!title.trim()) {
-      setErrorMessage('يرجى إدخال السؤال');
+      setErrorMessage('لازم تكتب السؤال');
       return;
     }
     
     // التحقق من الرمز السري
     if (secretCode !== '021') {
-      setErrorMessage('الرمز السري غير صحيح');
+      setErrorMessage('الباسوورد غلط');
       return;
     }
     
@@ -73,7 +73,7 @@ const CreateSessionPage = () => {
       console.error('خطأ في إنشاء الجلسة:', error);
       setErrorMessage(
         error.response?.data?.message || 
-        'حدث خطأ أثناء إنشاء الجلسة، يرجى المحاولة مرة أخرى'
+        'حصلت مشكلة أثناء إنشاء القيم، حاول مرة ثانية'
       );
       setLoading(false);
     }
@@ -82,7 +82,7 @@ const CreateSessionPage = () => {
   return (
     <div className="create-session-page">
       <div className="page-header">
-        <h1 className="page-title">إنشاء جلسة توقع جديدة</h1>
+        <h1 className="page-title">إنشاء قيم جديد</h1>
       </div>
       
       <div className="form-card">
@@ -92,14 +92,14 @@ const CreateSessionPage = () => {
         
         <form onSubmit={onSubmit}>
           <div className="form-section">
-            <h3 className="section-label">سؤال الجلسة</h3>
+            <h3 className="section-label">سؤال القيم</h3>
             <textarea
               id="title"
               name="title"
               className="form-control"
               value={title}
               onChange={onChange}
-              placeholder="اكتب سؤال الجلسة هنا..."
+              placeholder="اكتب سؤال القيم هنا..."
               rows={4}
             ></textarea>
           </div>
@@ -126,12 +126,12 @@ const CreateSessionPage = () => {
               </button>
             </div>
             <small className="form-text">
-              حدد العدد الأقصى للمشاركين في هذه الجلسة (من 2 إلى 20)
+              حدد العدد الأقصى للمشاركين في القيم (من 2 إلى 20)
             </small>
           </div>
           
           <div className="form-section">
-            <h3 className="section-label">الرمز السري</h3>
+            <h3 className="section-label">الباسوورد</h3>
             <input
               type="password"
               id="secretCode"
@@ -139,10 +139,10 @@ const CreateSessionPage = () => {
               className="form-control code-input"
               value={secretCode}
               onChange={onChange}
-              placeholder="أدخل الرمز السري الخاص بإنشاء الجلسات"
+              placeholder="اكتب الباسوورد الخاص بإنشاء الأقيام"
             />
             <small className="form-text">
-              الرمز السري مطلوب لمنع إنشاء جلسات عشوائية
+              الباسوورد مطلوبة لمنع الأقيام العشوائية
             </small>
           </div>
           
@@ -152,11 +152,11 @@ const CreateSessionPage = () => {
               className="btn btn-primary submit-btn"
               disabled={loading}
             >
-              {loading ? 'جارِ الإنشاء...' : 'ابدأ الجلسة'}
+              {loading ? 'جارِ الإنشاء...' : 'ابدأ القيم'}
             </button>
             
             <Link to="/dashboard" className="btn btn-text back-btn">
-              العودة إلى لوحة التحكم
+              ارجع للداشبورد
             </Link>
           </div>
         </form>

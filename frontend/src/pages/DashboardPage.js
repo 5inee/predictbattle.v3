@@ -35,7 +35,7 @@ const DashboardPage = () => {
       setSessions(data.sessions);
       setLoading(false);
     } catch (error) {
-      setErrorMessage('حدث خطأ أثناء جلب الجلسات');
+      setErrorMessage('حدث خطأ أثناء جلب الأقيام');
       setLoading(false);
     }
   }, [user.token]);
@@ -98,7 +98,7 @@ const DashboardPage = () => {
         navigate(`/session/${data.session._id}`);
       }, 1000);
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'حدث خطأ أثناء الانضمام إلى الجلسة');
+      setErrorMessage(error.response?.data?.message || 'حدث خطأ أثناء الانضمام للقيم');
       setLoading(false);
     }
   };
@@ -106,7 +106,7 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-page">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">لوحة التحكم</h1>
+        <h1 className="dashboard-title">الداشبورد</h1>
       </div>
       
       <div className="dashboard-tabs">
@@ -114,13 +114,13 @@ const DashboardPage = () => {
           className={`dashboard-tab ${activeTab === 'join' ? 'active' : ''}`}
           onClick={() => switchTab('join')}
         >
-          انضم/أنشئ جلسة
+          انضم/أنشئ قيم
         </div>
         <div 
           className={`dashboard-tab ${activeTab === 'sessions' ? 'active' : ''}`}
           onClick={() => switchTab('sessions')}
         >
-          جلساتي
+          الأقيام
         </div>
         <div className={`tab-indicator ${activeTab === 'sessions' ? 'right' : ''}`}></div>
       </div>
@@ -129,7 +129,7 @@ const DashboardPage = () => {
         {activeTab === 'join' ? (
           <div className="join-content">
             <div className="join-section">
-              <h3 className="subsection-title">كود الجلسة</h3>
+              <h3 className="subsection-title">كود القيم</h3>
               
               {errorMessage && (
                 <div className="alert alert-error">{errorMessage}</div>
@@ -156,7 +156,7 @@ const DashboardPage = () => {
                   className="btn btn-primary btn-block join-btn"
                   disabled={loading}
                 >
-                  {loading ? 'جارِ الانضمام...' : 'انضم إلى الجلسة'}
+                  {loading ? 'جارِ الانضمام...' : 'انضم إلى القيم'}
                 </button>
               </form>
               
@@ -165,27 +165,27 @@ const DashboardPage = () => {
               </div>
               
               <Link to="/create-session" className="btn btn-secondary btn-block create-btn">
-                إنشاء جلسة جديدة
+                إنشاء قيم جديد
               </Link>
             </div>
           </div>
         ) : (
           <div className="sessions-content">
-            <h2 className="section-title">جلساتي</h2>
+            <h2 className="section-title">الأقيام</h2>
             
             {loading ? (
               <div className="loading-container">
                 <div className="loading-spinner"></div>
-                <p className="loading-text">جارِ تحميل الجلسات...</p>
+                <p className="loading-text">جارِ تحميل الأقيام...</p>
               </div>
             ) : (
               <>
                 {sessions.length === 0 ? (
                   <div className="empty-state">
                     <div className="empty-icon">📋</div>
-                    <p>لا توجد جلسات حتى الآن</p>
+                    <p>ما فيه ولا قيم للحين</p>
                     <Link to="/create-session" className="btn btn-primary">
-                      أنشئ جلسة جديدة
+                      إنشاء قيم جديد
                     </Link>
                   </div>
                 ) : (

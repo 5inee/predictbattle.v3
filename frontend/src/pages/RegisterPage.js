@@ -41,19 +41,19 @@ const RegisterPage = () => {
     
     // التحقق من إدخال جميع البيانات
     if (!username || !password || !confirmPassword) {
-      setErrorMessage('يرجى إدخال جميع البيانات المطلوبة');
+      setErrorMessage('لازم تكتب كل البيانات المطلوبة');
       return;
     }
     
     // التحقق من تطابق كلمتي المرور
     if (password !== confirmPassword) {
-      setErrorMessage('كلمتا المرور غير متطابقتين');
+      setErrorMessage('الباسووردين مو زي بعض');
       return;
     }
     
-    // التحقق من طول كلمة المرور
+    // التحقق من طول الباسوورد
     if (password.length < 6) {
-      setErrorMessage('كلمة المرور يجب أن تكون على الأقل 6 أحرف');
+      setErrorMessage('الباسوورد يجب أن يكون على الأقل 6 أحرف');
       return;
     }
     
@@ -75,9 +75,9 @@ const RegisterPage = () => {
       <div className="auth-container">
         <div className="auth-image">
           <div className="auth-image-content">
-            <h2 className="auth-image-title">انضم إلينا اليوم!</h2>
+            <h2 className="auth-image-title">صفحة إنشاء حساب</h2>
             <p className="auth-image-description">
-              انشئ حسابك وكن جزءًا من هذا الحصن العظيم، واعظماهاهاههاهههه
+              سوي حسابك وابدا من هنا
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ const RegisterPage = () => {
             
             <form onSubmit={onSubmit}>
               <div className="input-group">
-                <label className="input-label" htmlFor="username">اسم المستخدم</label>
+                <label className="input-label" htmlFor="username">اليوزر</label>
                 <div className="input-wrapper">
                   <input
                     type="text"
@@ -101,13 +101,13 @@ const RegisterPage = () => {
                     className="form-control"
                     value={username}
                     onChange={onChange}
-                    placeholder="أدخل اسم المستخدم"
+                    placeholder="اكتب يوزرك"
                   />
                 </div>
               </div>
               
               <div className="input-group">
-                <label className="input-label" htmlFor="password">كلمة المرور</label>
+                <label className="input-label" htmlFor="password">الباسوورد</label>
                 <div className="input-wrapper">
                   <input
                     type="password"
@@ -116,13 +116,13 @@ const RegisterPage = () => {
                     className="form-control"
                     value={password}
                     onChange={onChange}
-                    placeholder="أدخل كلمة المرور (6 أحرف على الأقل)"
+                    placeholder="اكتب الباسوورد (6 أحرف على الأقل)"
                   />
                 </div>
               </div>
               
               <div className="input-group">
-                <label className="input-label" htmlFor="confirmPassword">تأكيد كلمة المرور</label>
+                <label className="input-label" htmlFor="confirmPassword">تأكيد الباسوورد</label>
                 <div className="input-wrapper">
                   <input
                     type="password"
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                     className="form-control"
                     value={confirmPassword}
                     onChange={onChange}
-                    placeholder="أعد إدخال كلمة المرور"
+                    placeholder="اكتب الباسوورد مرة ثانية"
                   />
                 </div>
               </div>
@@ -147,11 +147,17 @@ const RegisterPage = () => {
             
             <div className="auth-links">
               <p>
-                لديك حساب بالفعل؟{' '}
+                عندك حساب أصلاً؟{' '}
                 <Link to="/login" className="auth-link">
                   تسجيل الدخول
                 </Link>
               </p>
+               <p>
+                              ما تبي تسوي حساب؟ {' '}
+                              <Link to="/guest" className="auth-link">
+                                الدخول كجيست
+                              </Link>
+                            </p>
               <p>
                 <Link to="/" className="auth-link">
                   العودة للصفحة الرئيسية

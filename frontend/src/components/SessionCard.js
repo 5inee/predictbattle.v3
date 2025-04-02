@@ -38,7 +38,7 @@ const SessionCard = ({ session }) => {
       
       <div className="session-details">
         <div className="session-info code">
-          <span className="info-label">كود الجلسة:</span> 
+          <span className="info-label">كود القيم:</span> 
           <span className="session-code">{session.code}</span>
         </div>
         <div className="session-info date">
@@ -46,7 +46,7 @@ const SessionCard = ({ session }) => {
           <span>{formatDate(session.createdAt)}</span>
         </div>
         <div className="session-info participants">
-          <span className="info-label">المشاركون:</span> 
+          <span className="info-label">المشاركين:</span> 
           <div className="participants-count">
             <span>{session.participants?.length || 0}</span>
             <div className="participants-progress">
