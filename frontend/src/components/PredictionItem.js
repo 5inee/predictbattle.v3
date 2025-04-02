@@ -1,18 +1,16 @@
 import React from 'react';
 import './PredictionItem.css';
 
-const PredictionItem = ({ prediction, isCurrentUser }) => {
-  // التأكد من وجود بيانات المستخدم
+const PredictionItem = ({ prediction, isCurrentUser, index }) => {
   if (!prediction || !prediction.user) {
     console.error('خطأ: بيانات التوقع أو المستخدم غير متوفرة', prediction);
     return null;
   }
 
-  // تنسيق التاريخ والوقت (بالميلادي)
   const formatDateTime = (dateString) => {
-    const options = { 
-      year: 'numeric', 
-      month: 'long', 
+    const options = {
+      year: 'numeric',
+      month: 'long',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
@@ -20,24 +18,21 @@ const PredictionItem = ({ prediction, isCurrentUser }) => {
     return new Date(dateString).toLocaleDateString('ar', options);
   };
 
-  // توليد حرف أولي للمستخدم
   const getInitial = (username) => {
     return username.charAt(0).toUpperCase();
   };
 
-  // توليد لون للصورة الرمزية
-  const getAvatarColor = (username) => {
+  const getAvatarColor = () => {
     let hash = 0;
-    for (let i = 0; i < username.length; i++) {
-      hash = username.charCodeAt(i) + ((hash << 5) - hash);
+    for (let i = 0; i < prediction.user._id.length; i++) {
+      hash = prediction.user._id.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const hue = Math.floor((Math.abs(hash) * 137.508) % 360);
-    const saturation = 75;
-    const lightness = 60;
+    const hue = (Math.abs(hash) * 137 + 50) % 360; // زيادة التباعد بتغيير الثابت
+    const saturation = 60 + (Math.abs(hash) % 20); // جعل التشبع متغيرًا بين 60-80
+    const lightness = 40 + (Math.abs(hash) % 20); // جعل الإضاءة متغيرة بين 40-60
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   };
 
-  // توليد معرف مختصر
   const getShortId = (id) => {
     if (!id) return '';
     return id.substring(0, 6);
@@ -49,7 +44,7 @@ const PredictionItem = ({ prediction, isCurrentUser }) => {
         <div className="user-info">
           <div 
             className="avatar" 
-            style={{ backgroundColor: getAvatarColor(prediction.user.username) }}
+            style={{ backgroundColor: getAvatarColor() }}
           >
             {getInitial(prediction.user.username)}
           </div>
