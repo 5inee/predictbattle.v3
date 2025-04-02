@@ -19,15 +19,16 @@ const HomePage = () => {
       <section className="hero-section">
         <div className="welcome-card fade-in">
           <div className="welcome-header">
-            <h1 className="welcome-title">القرشينااات لو مقوووششش</h1>
-            <p className="welcome-subtitle">خش كضيف نفداك</p>
+            <h1 className="welcome-title"></h1>
+            <p className="welcome-subtitle"></p>
           </div>
+          
           
           <div className="welcome-content">
             <p>
-              أي خطأ وارد، لذلك كن مدركًا أن.. يرجال فاضي تقرا؟ خش كضيف اخلص
-            </p>
+            </p> 
           </div>
+          
           
           <div className="welcome-actions">
             <Link to="/login" className="btn btn-primary btn-block mb-2">
