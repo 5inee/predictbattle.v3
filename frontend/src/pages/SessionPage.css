@@ -386,7 +386,6 @@
 
 .back-to-dashboard::before {
   content: '←';
-  margin-left: 0.8rem;
   transition: transform 0.3s ease;
 }
 
