@@ -53,7 +53,7 @@ exports.joinSession = async (req, res) => {
     const session = await Session.findOne({ code }).populate('participants', 'username');
 
     if (!session) {
-      return res.status(404).json({ message: 'لم يتم العثور على الجلسة بهذا الكود' });
+      return res.status(404).json({ message: 'ما فيه حاليًا قيم بهالكود' });
     }
 
     // التحقق مما إذا كان المستخدم مشاركًا بالفعل
@@ -64,7 +64,7 @@ exports.joinSession = async (req, res) => {
     if (isAlreadyParticipant) {
       return res.status(200).json({
         success: true,
-        message: 'أنت مشارك بالفعل في هذه الجلسة',
+        message: 'أنت موجود فعلا في القيم هذا',
         session: {
           _id: session._id,
           title: session.title,
@@ -80,7 +80,7 @@ exports.joinSession = async (req, res) => {
 
     // التحقق من عدم امتلاء الجلسة
     if (session.participants.length >= session.maxPlayers) {
-      return res.status(400).json({ message: 'هذه الجلسة ممتلئة بالفعل' });
+      return res.status(400).json({ message: 'عدد المشاركين في القيم وصل للحد الأقصى' });
     }
 
     // إضافة المستخدم إلى المشاركين
@@ -97,8 +97,8 @@ exports.joinSession = async (req, res) => {
       session: updatedSession
     });
   } catch (error) {
-    console.error('خطأ في الانضمام إلى الجلسة:', error);
-    res.status(500).json({ message: 'خطأ في الانضمام إلى الجلسة', error: error.message });
+    console.error('خطأ في الانضمام إلى القيم:', error);
+    res.status(500).json({ message: 'خطأ في الانضمام إلى القيم', error: error.message });
   }
 };
 
@@ -112,7 +112,7 @@ exports.submitPrediction = async (req, res) => {
     const session = await Session.findById(sessionId);
 
     if (!session) {
-      return res.status(404).json({ message: 'لم يتم العثور على الجلسة' });
+      return res.status(404).json({ message: 'لم يتم العثور على القيم' });
     }
 
     // التحقق من أن المستخدم مشارك في الجلسة
@@ -121,7 +121,7 @@ exports.submitPrediction = async (req, res) => {
     );
 
     if (!isParticipant) {
-      return res.status(403).json({ message: 'أنت لست مشاركًا في هذه الجلسة' });
+      return res.status(403).json({ message: 'أنت مو مشارك في هذا القيم' });
     }
 
     // التحقق من أن المستخدم لم يرسل توقعًا من قبل
@@ -130,7 +130,7 @@ exports.submitPrediction = async (req, res) => {
     );
 
     if (hasSubmitted) {
-      return res.status(400).json({ message: 'لقد قمت بالفعل بإرسال توقع في هذه الجلسة' });
+      return res.status(400).json({ message: 'أنت أصلاً أرسلت التوقع في هذا القيم' });
     }
 
     // إضافة التوقع
@@ -149,7 +149,7 @@ exports.submitPrediction = async (req, res) => {
       .populate('participants', 'username')
       .populate('predictions.user', 'username');
 
-    console.log('تم تحديث الجلسة بنجاح:', {
+    console.log('تم تحديث القيم بنجاح:', {
       sessionId,
       predictionsCount: updatedSession.predictions.length,
       isComplete: updatedSession.isComplete
@@ -177,10 +177,10 @@ exports.getSession = async (req, res) => {
       .populate('predictions.user', 'username');
 
     if (!session) {
-      return res.status(404).json({ message: 'لم يتم العثور على الجلسة' });
+      return res.status(404).json({ message: 'لم يتم العثور على القيم' });
     }
 
-    console.log('تم إرجاع بيانات الجلسة:', {
+    console.log('تم إرجاع بيانات القيم:', {
       sessionId: id,
       predictionsCount: session.predictions.length,
       participantsCount: session.participants.length
@@ -191,8 +191,8 @@ exports.getSession = async (req, res) => {
       session
     });
   } catch (error) {
-    console.error('خطأ في جلب بيانات الجلسة:', error);
-    res.status(500).json({ message: 'خطأ في جلب بيانات الجلسة', error: error.message });
+    console.error('خطأ في جلب بيانات القيم:', error);
+    res.status(500).json({ message: 'خطأ في جلب بيانات القيم', error: error.message });
   }
 };
 
@@ -210,7 +210,7 @@ exports.getUserSessions = async (req, res) => {
       sessions
     });
   } catch (error) {
-    console.error('خطأ في جلب الجلسات:', error);
-    res.status(500).json({ message: 'خطأ في جلب الجلسات', error: error.message });
+    console.error('خطأ في جلب الأقيام:', error);
+    res.status(500).json({ message: 'خطأ في جلب الأقيام', error: error.message });
   }
 };

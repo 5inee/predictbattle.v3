@@ -69,7 +69,7 @@ const DashboardPage = () => {
     
     // التحقق من إدخال الكود
     if (!sessionCode || sessionCode.length !== 6) {
-      setErrorMessage('يرجى إدخال كود صالح مكون من 6 أحرف');
+      setErrorMessage('لازم الكود يكون من 6 أحرف');
       return;
     }
     
@@ -90,7 +90,7 @@ const DashboardPage = () => {
         headers
       );
       
-      setSuccessMessage('تم الانضمام إلى الجلسة بنجاح');
+      setSuccessMessage('انضميت للقيم بنجاح');
       setLoading(false);
       
       // التوجيه إلى صفحة الجلسة بعد ثانية
@@ -98,7 +98,7 @@ const DashboardPage = () => {
         navigate(`/session/${data.session._id}`);
       }, 1000);
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'حدث خطأ أثناء الانضمام للقيم');
+      setErrorMessage(error.response?.data?.message || 'صار خطأ بالانضمام للقيم');
       setLoading(false);
     }
   };
