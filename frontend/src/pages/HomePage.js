@@ -38,7 +38,7 @@ const HomePage = () => {
               إنشاء حساب
             </Link>
             <Link to="/guest" className="btn btn-text btn-block">
-              الدخول كضيف
+              الدخول كجيست
             </Link>
           </div>
         </div>

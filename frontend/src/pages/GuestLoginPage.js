@@ -139,13 +139,13 @@ const GuestLoginPage = () => {
             
             <div className="auth-links">
               <p>
-                أفضل إنشاء حساب كامل؟{' '}
+                ما عندك حساب؟{' '}
                 <Link to="/register" className="auth-link">
                   إنشاء حساب
                 </Link>
               </p>
               <p>
-                لديك حساب بالفعل؟{' '}
+                عندك حساب أصلاً؟{' '}
                 <Link to="/login" className="auth-link">
                   تسجيل الدخول
                 </Link>
